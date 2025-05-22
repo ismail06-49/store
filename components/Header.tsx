@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className="bg-white shadow-md">
             {/* Announcement bar at the top */}
-            <div className='font-normal bg-slate-950 text-white text-sm flex flex-row justify-center p-3'>
+            <div className='font-normal bg-slate-900 text-white text-sm flex flex-row justify-center p-3'>
                 <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!</p>
                 {/* ShopNow link next to the announcement */}
                 <Link className='font-semibold underline ms-4' href=''>ShopNow</Link>
