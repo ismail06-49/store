@@ -1,0 +1,122 @@
+'use client';
+
+import { useEffect, useState } from 'react'
+import item1 from '@/public/item1.png';
+import item2 from '@/public/item2.png';
+import item3 from '@/public/item3.png';
+import item4 from '@/public/item4.png';
+import Image from 'next/image';
+
+const THREE_DAYS_IN_SECONDS = 3 * 24 * 60 * 60; // 3 days in seconds
+
+const itemsData = [
+    { id: 1, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", stars: 5 },
+    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", stars: 3 },
+    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", stars: 4 },
+    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", stars: 5 },
+    { id: 5, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", stars: 5 },
+    { id: 6, img: item2, name: "AK-900 Wired Keyboard", price: "$160", stars: 3 },
+    { id: 7, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", stars: 4 },
+    { id: 8, img: item4, name: "S-Series Comfort Chair ", price: "$375", stars: 5 }
+    // Add more items as needed
+];
+
+const Today = () => {
+    const [secondsLeft, setSecondsLeft] = useState(THREE_DAYS_IN_SECONDS);
+    const [startIndex, setStartIndex] = useState(0); // For carousel
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSecondsLeft(prev => {
+                if (prev <= 1) {
+                    return THREE_DAYS_IN_SECONDS;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatTime = (secs: number) => {
+        const days = Math.floor(secs / (24 * 60 * 60));
+        const hours = Math.floor((secs % (24 * 60 * 60)) / 3600);
+        const minutes = Math.floor((secs % 3600) / 60);
+        const seconds = secs % 60;
+        return `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+    };
+
+    // Get the visible items for the current window
+    const visibleItems = itemsData.slice(startIndex, startIndex + 4);
+
+    // Handlers for navigation
+    const handlePrev = () => {
+        setStartIndex(prev => Math.max(prev - 1, 0));
+    };
+
+    const handleNext = () => {
+        setStartIndex(prev => Math.min(prev + 1, itemsData.length - 4));
+    };
+
+    // Helper to render stars
+    const renderStars = (count: number) => (
+        <div className="flex justify-center mt-2">
+            {[...Array(5)].map((_, i) => (
+                <svg
+                    key={i}
+                    className={`w-5 h-5 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <polygon points="9.9,1.1 7.6,6.6 1.6,7.6 6,11.7 4.9,17.6 9.9,14.7 14.9,17.6 13.8,11.7 18.2,7.6 12.2,6.6 " />
+                </svg>
+            ))}
+        </div>
+    );
+
+    return (
+        <div className='container min-h-[450px] mx-auto py-8 px-6'>
+            <h3 className='border-l-20 text-[#2F2F60] hover:text-red-500 p-3 border-red-500 font-semibold text-lg'>Today’s</h3>
+            {/* Countdown timer */}
+            <div className="mt-10 text-4xl font-bold text-black">
+                <span className='me-6'>Flash Sales </span>{formatTime(secondsLeft)}
+            </div>
+            {/* Items carousel */}
+            <div className="mt-10 relative">
+                {/* Left button */}
+                <button
+                    onClick={handlePrev}
+                    disabled={startIndex === 0}
+                    className="px-3 py-2 bg-gray-200 text-red-500 rounded disabled:opacity-50 mr-4 absolute top-0 right-6 -translate-12/12"
+                >
+                    &#8592;
+                </button>
+                {/* Items */}
+                <div className="grid grid-cols-4 gap-6 overflow-hidden w-full">
+                    {visibleItems.map(item => (
+                        <div key={item.id} className="min-w-[220px] bg-white rounded-lg shadow p-4 grid grid-rows-3">
+                            <div className="row-span-2 flex justify-center items-center">
+                                <Image src={item.img} alt={item.name} width={120} height={120} className="mb-4 object-contain" />
+                            </div>
+                            <div>
+                                <div className="font-semibold mb-2">{item.name}</div>
+                                <div className="text-lg text-red-500 mb-2">{item.price}</div>
+                                {renderStars(item.stars)}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                {/* Right button */}
+                <button
+                    onClick={handleNext}
+                    disabled={startIndex >= itemsData.length - 4}
+                    className="px-3 py-2 bg-gray-200 text-red-500 rounded disabled:opacity-50 ml-4 absolute top-0 right-0 -translate-12/12"
+                >
+                    &#8594;
+                </button>
+            </div>
+        </div>
+    )
+}
+
+export default Today

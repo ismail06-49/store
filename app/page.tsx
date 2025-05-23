@@ -1,5 +1,6 @@
 import Header from "@/components/Header"; // Import the Header component
 import Hero from "@/components/Hero";     // Import the Hero component
+import Today from "@/components/Today";
 
 // Home page component for the store
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <Header />
       {/* Render the Hero section below the Header */}
       <Hero />
+      <Today />
     </div>
   );
 }
