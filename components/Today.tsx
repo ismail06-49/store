@@ -6,6 +6,7 @@ import item2 from '@/public/item2.png';
 import item3 from '@/public/item3.png';
 import item4 from '@/public/item4.png';
 import Image from 'next/image';
+import { Heart } from 'lucide-react';
 
 const THREE_DAYS_IN_SECONDS = 3 * 24 * 60 * 60; // 3 days in seconds
 
@@ -60,7 +61,7 @@ const Today = () => {
 
     // Helper to render stars
     const renderStars = (count: number) => (
-        <div className="flex justify-center mt-2">
+        <div className="mt-2 flex">
             {[...Array(5)].map((_, i) => (
                 <svg
                     key={i}
@@ -92,11 +93,18 @@ const Today = () => {
                     &#8592;
                 </button>
                 {/* Items */}
-                <div className="grid grid-cols-4 gap-6 overflow-hidden w-full">
+                <div className="grid grid-cols-4 gap-6 overflow-hidden p-2 w-full">
                     {visibleItems.map(item => (
-                        <div key={item.id} className="min-w-[220px] bg-white rounded-lg shadow p-4 grid grid-rows-3">
-                            <div className="row-span-2 flex justify-center items-center">
+                        <div key={item.id} className="min-w-[220px] bg-white rounded-lg shadow-md p-4 grid grid-rows-3">
+                            <div className="relative row-span-2 bg-slate-300/30 rounded-md flex justify-center items-center group">
                                 <Image src={item.img} alt={item.name} width={120} height={120} className="mb-4 object-contain" />
+                                <Heart className='absolute top-0 right-0 -translate-x-2 translate-y-2 bg-white text-red-500 p-1 rounded-full' />
+                                {/* Button appears only on hover */}
+                                <button
+                                    className="absolute bottom-0 w-full text-white bg-black py-2 rounded opacity-0 group-hover:opacity-100 transition"
+                                >
+                                    Add To Cart
+                                </button>
                             </div>
                             <div>
                                 <div className="font-semibold mb-2">{item.name}</div>
