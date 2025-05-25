@@ -6,19 +6,19 @@ import item2 from '@/public/item2.png';
 import item3 from '@/public/item3.png';
 import item4 from '@/public/item4.png';
 import Image from 'next/image';
-import { Heart } from 'lucide-react';
+import { Eye, Heart } from 'lucide-react';
 
 const THREE_DAYS_IN_SECONDS = 3 * 24 * 60 * 60; // 3 days in seconds
 
 const itemsData = [
-    { id: 1, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", stars: 5 },
-    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", stars: 3 },
-    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", stars: 4 },
-    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", stars: 5 },
-    { id: 5, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", stars: 5 },
-    { id: 6, img: item2, name: "AK-900 Wired Keyboard", price: "$160", stars: 3 },
-    { id: 7, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", stars: 4 },
-    { id: 8, img: item4, name: "S-Series Comfort Chair ", price: "$375", stars: 5 }
+    { id: 1, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", solde: '-35%', stars: 5 },
+    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", solde: '-40%', stars: 3 },
+    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", solde: '-50%', stars: 4 },
+    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", solde: '-20%', stars: 5 },
+    { id: 5, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", solde: '-35%', stars: 5 },
+    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", solde: '-40%', stars: 3 },
+    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", solde: '-50%', stars: 4 },
+    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", solde: '-20%', stars: 5 },
     // Add more items as needed
 ];
 
@@ -98,7 +98,9 @@ const Today = () => {
                         <div key={item.id} className="min-w-[220px] bg-white rounded-lg shadow-md p-4 grid grid-rows-3">
                             <div className="relative row-span-2 bg-slate-300/30 rounded-md flex justify-center items-center group">
                                 <Image src={item.img} alt={item.name} width={120} height={120} className="mb-4 object-contain" />
-                                <Heart className='absolute top-0 right-0 -translate-x-2 translate-y-2 bg-white text-red-500 p-1 rounded-full' />
+                                <Heart className='absolute top-0 right-0 -translate-x-2 translate-y-2 bg-white text-red-500 p-1 rounded-full cursor-pointer' />
+                                <Eye className='absolute top-0 right-0 -translate-x-2 translate-y-10 bg-white text-red-500 p-1 rounded-full cursor-pointer' />
+                                <div className='text-lg font-normal absolute top-0 left-0 translate-x-2 translate-y-2 bg-red-500 text-white rounded-sm px-3'>{item.solde}</div>
                                 {/* Button appears only on hover */}
                                 <button
                                     className="absolute bottom-0 w-full text-white bg-black py-2 rounded opacity-0 group-hover:opacity-100 transition"
