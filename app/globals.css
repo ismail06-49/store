@@ -132,7 +132,6 @@
       visibility: hidden;
       transform: translate3d(0, 200%, 0);
     }40% {
-      visibility: visible;
       transform: translate3d(0, 200%, 0);
     }
     80% {
@@ -142,6 +141,7 @@
       transform: translate3d(0, 10%, 0);
     }
     100% {
+      visibility: visible;
       transform: translate3d(0, 0, 0);
     }
   }

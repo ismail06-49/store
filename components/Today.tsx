@@ -11,14 +11,14 @@ import { Eye, Heart } from 'lucide-react';
 const THREE_DAYS_IN_SECONDS = 3 * 24 * 60 * 60; // 3 days in seconds
 
 const itemsData = [
-    { id: 1, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", solde: '-35%', stars: 5 },
-    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", solde: '-40%', stars: 3 },
-    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", solde: '-50%', stars: 4 },
-    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", solde: '-20%', stars: 5 },
-    { id: 5, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", solde: '-35%', stars: 5 },
-    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", solde: '-40%', stars: 3 },
-    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", solde: '-50%', stars: 4 },
-    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", solde: '-20%', stars: 5 },
+    { id: 1, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", oldPrice:'$185', solde: '-35%', stars: 5, numberOfComments: '88' },
+    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", oldPrice:'$265', solde: '-40%', stars: 3, numberOfComments: '70' },
+    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", oldPrice:'$800', solde: '-50%', stars: 4, numberOfComments: '113' },
+    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", oldPrice:'$470', solde: '-20%', stars: 5, numberOfComments: '91' },
+    { id: 5, img: item1, name: "HAVIT HV-G92 Gamepad", price: "$120", oldPrice:'$185', solde: '-35%', stars: 5, numberOfComments: '88' },
+    { id: 2, img: item2, name: "AK-900 Wired Keyboard", price: "$160", oldPrice:'$265', solde: '-40%', stars: 3, numberOfComments: '70' },
+    { id: 3, img: item3, name: "IPS LCD Gaming Monitor", price: "$400", oldPrice:'$800', solde: '-50%', stars: 4, numberOfComments: '113' },
+    { id: 4, img: item4, name: "S-Series Comfort Chair ", price: "$375", oldPrice:'$470', solde: '-20%', stars: 5, numberOfComments: '91' }
     // Add more items as needed
 ];
 
@@ -110,8 +110,11 @@ const Today = () => {
                             </div>
                             <div>
                                 <div className="font-semibold mb-2">{item.name}</div>
-                                <div className="text-lg text-red-500 mb-2">{item.price}</div>
-                                {renderStars(item.stars)}
+                                <div className="text-lg font-medium text-red-500 mb-2">{item.price} <span className='text-gray-500 ms-2 line-through'>{item.oldPrice}</span></div>
+                                <div className='flex items-center text-lg font-medium'>
+                                    {renderStars(item.stars)}
+                                    <span className='text-gray-500 ms-2'>{`(${item.numberOfComments})`}</span>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -123,6 +126,11 @@ const Today = () => {
                     className="px-3 py-2 bg-gray-200 text-red-500 rounded disabled:opacity-50 ml-4 absolute top-0 right-0 -translate-12/12"
                 >
                     &#8594;
+                </button>
+            </div>
+            <div className='mt-10 text-center'>
+                <button className='bg-red-500 text-white px-16 py-2 rounded-md font-semibold hover:bg-red-600 transition'>
+                    View All
                 </button>
             </div>
         </div>
