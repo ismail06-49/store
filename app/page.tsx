@@ -2,6 +2,7 @@ import Benfit from "@/components/Benfit";
 import Break from "@/components/Break";
 import Category from "@/components/Category";
 import Featured from "@/components/Featured";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header"; // Import the Header component
 import Hero from "@/components/Hero";     // Import the Hero component
 import Month from "@/components/Month";
@@ -27,6 +28,7 @@ export default function Home() {
       <Break />
       <Featured />
       <Benfit />
+      <Footer />
     </div>
   );
 }
