@@ -1,3 +1,4 @@
+import Benfit from "@/components/Benfit";
 import Break from "@/components/Break";
 import Category from "@/components/Category";
 import Featured from "@/components/Featured";
@@ -25,6 +26,7 @@ export default function Home() {
       <Products />
       <Break />
       <Featured />
+      <Benfit />
     </div>
   );
 }
