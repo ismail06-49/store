@@ -16,7 +16,7 @@ const Category = () => {
             <div className="my-10 text-4xl font-bold text-black">
                 Browse By Category
             </div>
-            <div className="grid grid-cols-6 grid-rows-1 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 grid-rows-1 gap-4">
                 {categories.map((category, index) => {
                     const Icon = category.icon;
                     return (
