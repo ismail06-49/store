@@ -20,14 +20,16 @@ const Header = () => {
             <nav className="container mx-auto grid grid-cols-2 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 items-center py-4 px-6">
                 {/* Store logo/title */}
                 <h1 className="font-bold text-black text-2xl">Exclusive</h1>
+                {/* Hamburger menu button for mobile */}
                 <button
                     className="md:hidden mx-auto me-0 text-gray-700 hover:text-red-500 cursor-pointer"
                     onClick={() => setMenuOpen(!menuOpen)}
                     aria-label="Toggle menu"
                 >
+                    {/* Show X icon if menu is open, hamburger otherwise */}
                     {menuOpen ? <X className='size-6' /> : <AlignJustify className='size-6' />}
                 </button>
-                {/* Navigation links */}
+                {/* Navigation links (responsive: hidden on mobile unless menuOpen) */}
                 <ul className={`mx-auto flex gap-4 ${menuOpen ? "block" : "hidden md:flex"}`}>
                     <li className="font-normal text-black text-lg hover:text-red-500 cursor-pointer">Home</li>
                     <li className="font-normal text-black text-lg hover:text-red-500 cursor-pointer">Contact</li>
