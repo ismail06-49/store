@@ -43,7 +43,7 @@ const Header = () => {
                         <input
                             type="search"
                             placeholder="Search"
-                            className="border rounded-md pl-10 pr-3 py-1 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            className="w-full border rounded-md pl-10 pr-3 py-1 focus:outline-none focus:ring-2 focus:ring-red-500"
                         />
                         {/* Search icon positioned inside the input */}
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
