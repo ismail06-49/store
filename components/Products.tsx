@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import item10 from '@/public/item11.png';
 import item20 from '@/public/item12.png';
 import item30 from '@/public/item13.png';
@@ -10,9 +13,34 @@ const itemsData = [
     { id: 1, img: item10, name: "Kids Electric Car", price: "$260", oldPrice:'$360', stars: 5, numberOfComments: '65', tag: 'new' },
     { id: 2, img: item20, name: "Jr. Zoom Soccer Cleats", price: "$960", oldPrice:'$1160', stars: 4, numberOfComments: '65' },
     { id: 3, img: item30, name: "GP11 Shooter USB Gamepad", price: "$160", oldPrice:'$170', stars: 4, numberOfComments: '65', tag: 'new' },
-    { id: 4, img: item40, name: "Quilted Satin Jacket", price: "$360", oldPrice:'$400', stars: 5, numberOfComments: '65' }
-    // Add more items as needed
+    { id: 4, img: item40, name: "Quilted Satin Jacket", price: "$360", oldPrice:'$400', stars: 5, numberOfComments: '65' },
+    { id: 5, img: item10, name: "Kids Electric Car", price: "$260", oldPrice:'$360', stars: 5, numberOfComments: '65', tag: 'new' },
+    { id: 6, img: item20, name: "Jr. Zoom Soccer Cleats", price: "$960", oldPrice:'$1160', stars: 4, numberOfComments: '65' },
+    { id: 7, img: item30, name: "GP11 Shooter USB Gamepad", price: "$160", oldPrice:'$170', stars: 4, numberOfComments: '65', tag: 'new' },
+    { id: 8, img: item40, name: "Quilted Satin Jacket", price: "$360", oldPrice:'$400', stars: 5, numberOfComments: '65' }
 ];
+
+// Custom hook to determine visible item count based on screen size
+function useVisibleCount() {
+    const [count, setCount] = useState(4);
+
+    useEffect(() => {
+        function updateCount() {
+            if (window.innerWidth < 640) {
+                setCount(1); // sm
+            } else if (window.innerWidth < 1024) {
+                setCount(2); // md
+            } else {
+                setCount(4); // lg and up
+            }
+        }
+        updateCount();
+        window.addEventListener('resize', updateCount);
+        return () => window.removeEventListener('resize', updateCount);
+    }, []);
+
+    return count;
+}
 
 // Products component: Displays a grid of products with images, prices, and actions
 const Products = () => {
@@ -33,6 +61,23 @@ const Products = () => {
         </div>
     );
 
+    // State for carousel start index
+    const [startIndex, setStartIndex] = useState(0);
+    
+    // Use custom hook to get visible item count based on screen size
+    const visibleCount = useVisibleCount();
+    
+    // Get the visible items for the current carousel window
+    const visibleItems = itemsData.slice(startIndex, startIndex + visibleCount);
+
+    // Handlers for carousel navigation
+    const handlePrev = () => {
+        setStartIndex(prev => Math.max(prev - 1, 0));
+    };
+    const handleNext = () => {
+        setStartIndex(prev => Math.min(prev + 1, itemsData.length - visibleCount));
+    };
+
     return (
         // Main container with padding and minimum height
         <div className='container min-h-[450px] mx-auto py-8 px-6'>
@@ -45,11 +90,26 @@ const Products = () => {
                     View All
                 </button>
             </div>
-            {/* Product grid */}
-            <div className="mt-10">
-                {/* Items grid */}
-                <div className="grid grid-cols-4 gap-6 overflow-hidden p-2 w-full">
-                    {itemsData.map(item => (
+            {/* Carousel with navigation */}
+            <div className="mt-10 relative">
+                {/* Left navigation button */}
+                <button
+                    onClick={handlePrev}
+                    disabled={startIndex === 0}
+                    className="px-3 py-2 bg-gray-200 text-red-500 rounded disabled:opacity-50 mr-2 absolute left-0 top-1/2 -translate-y-1/2 z-10"
+                    aria-label="Previous"
+                >
+                    &#8592;
+                </button>
+                {/* Carousel items grid */}
+                <div
+                    className={`
+                        grid gap-6 overflow-hidden p-2 px-12 w-full
+                        grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+                        mx-auto
+                    `}
+                >
+                    {visibleItems.map(item => (
                         // Individual product card
                         <div key={item.id} className="min-w-[220px] bg-white rounded-lg shadow-md p-4 grid grid-rows-3">
                             {/* Product image and action icons */}
@@ -84,6 +144,15 @@ const Products = () => {
                         </div>
                     ))}
                 </div>
+                {/* Right navigation button */}
+                <button
+                    onClick={handleNext}
+                    disabled={startIndex >= itemsData.length - visibleCount}
+                    className="px-3 py-2 bg-gray-200 text-red-500 rounded disabled:opacity-50 ml-2 absolute right-0 top-1/2 -translate-y-1/2 z-10"
+                    aria-label="Next"
+                >
+                    &#8594;
+                </button>
             </div>
         </div>
     )

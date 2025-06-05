@@ -122,7 +122,7 @@ const Today = () => {
                 {/* Carousel items grid */}
                 <div
                     className={`
-                        grid gap-6 overflow-hidden p-2 px-10 w-full
+                        grid gap-6 overflow-hidden p-2 px-12 w-full
                         grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
                         mx-auto
                     `}

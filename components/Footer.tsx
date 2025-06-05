@@ -4,25 +4,25 @@ import Qr from '@/public/Qrcode 1.png';
 import Ps from '@/public/playStore.png';
 import As from '@/public/appStore.png';
 
-// Footer component: Displays the store footer with links, app downloads, and social icons
+// Footer component: Responsive and mobile-friendly
 const Footer = () => {
     return (
         <footer className="w-full bg-[#000022] text-white">
             {/* Main grid container for footer sections */}
-            <div className="grid grid-cols-5 grid-rows-1 gap-26 container min-h-[450px] mx-auto py-16 px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 container min-h-[450px] mx-auto py-16 px-4 md:px-8">
                 {/* Brand and newsletter subscription */}
                 <div className="flex flex-col gap-6">
                     <h4 className="text-2xl font-bold">Exclusive</h4>
                     <h5 className="text-[20px] font-medium">Subscribe</h5>
                     <p className="text-[16px] font-normal">Get 10% off your first order</p>
                     {/* Email input with send button */}
-                    <div className="relative">
+                    <div className="relative max-w-xs">
                         <input
                             type="text"
                             placeholder="Enter your email"
-                            className="px-4 py-2 text-white outline-2 outline-white rounded-sm"
+                            className="w-full px-4 py-2 text-white bg-transparent border border-white/30 rounded-sm focus:outline-none"
                         />
-                        <button className="absolute top-0 right-0 -translate-x-[50%] translate-y-[50%] bg-transparent">
+                        <button className="absolute top-1/2 right-2 -translate-y-1/2 bg-transparent">
                             <SendHorizonal className="text-white w-5 h-5" />
                         </button>
                     </div>
@@ -55,14 +55,14 @@ const Footer = () => {
                 <div className="flex flex-col gap-6">
                     <h4 className="text-2xl font-bold">Download App</h4>
                     {/* App download section with QR and store badges */}
-                    <div className="grid grid-cols-2 grid-rows-3">
+                    <div className="grid grid-cols-2 grid-rows-3 gap-2">
                         <p className="col-span-2 text-[12px] font-medium">Save $3 with App New User Only</p>
-                        <Image src={Qr} alt="Qr code" className="row-span-2 row-start-2"/>
-                        <Image src={Ps} alt="Play store" className="row-start-2"/>
-                        <Image src={As} alt="App store" className="col-start-2 row-start-3"/>
+                        <Image src={Qr} alt="Qr code" className="row-span-2 row-start-2 w-20 h-20 object-contain" />
+                        <Image src={Ps} alt="Play store" className="row-start-2 w-20 h-8 object-contain" />
+                        <Image src={As} alt="App store" className="col-start-2 row-start-3 w-20 h-8 object-contain" />
                     </div>
                     {/* Social media icons */}
-                    <div className="grid grid-cols-4 grid-rows-1 gap-4">
+                    <div className="flex gap-4 mt-2">
                         <Facebook className="size-6" />
                         <Twitter className="size-6" />
                         <Instagram className="size-6" />
